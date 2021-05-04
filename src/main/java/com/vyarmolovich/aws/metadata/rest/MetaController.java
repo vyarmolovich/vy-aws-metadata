@@ -1,5 +1,6 @@
 package com.vyarmolovich.aws.metadata.rest;
 
+import com.amazonaws.util.EC2MetadataUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,7 +14,7 @@ public class MetaController {
 
     @GetMapping("/meta")
     public Meta greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
-        return new Meta("eu-west-1", "eu-west-1a");
+        return new Meta(EC2MetadataUtils.getEC2InstanceRegion(), EC2MetadataUtils.getAvailabilityZone());
     }
 
 }
